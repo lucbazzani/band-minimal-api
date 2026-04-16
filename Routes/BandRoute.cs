@@ -1,11 +1,14 @@
-﻿namespace Band.Routes;
+﻿using Band.Models;
 
-public static class BandRoute
+namespace Band.Routes
 {
-    // key word "this" as a parameter means it is an extension method
-    public static void BandRoutes(this WebApplication app)
+    public static class BandRoute
     {
-        app.MapGet("band", () => "Olá, Banda!");
+        // key word "this" as a parameter means it is an extension method
+        public static void BandRoutes(this WebApplication app)
+        {
+            app.MapGet("band", () => new BandModel("Um Resgate Não Será Possível"));
+        }
     }
-}
 
+}
