@@ -15,7 +15,7 @@ namespace Band.Migrations
                 table: "Bands",
                 type: "INTEGER",
                 nullable: false,
-                defaultValue: true);
+                defaultValue: false);
         }
 
         /// <inheritdoc />

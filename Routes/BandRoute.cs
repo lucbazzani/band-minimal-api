@@ -9,7 +9,7 @@ namespace Band.Routes
         // key word "this" as a parameter means it is an extension method
         public static void BandRoutes(this WebApplication app)
         {
-            var route = app.MapGroup("band");
+            var route = app.MapGroup("bands");
 
             route.MapPost("", 
                 async (BandRequest req, BandContext context) =>
