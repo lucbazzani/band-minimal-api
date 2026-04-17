@@ -28,6 +28,9 @@ This project highlights:
 | Verb   | Endpoint       | Description                       |
 | :---   | :---           | :---                              |
 | GET    | `/bands`       | Retrieves all registered bands    |
+| POST    | `/bands`       | Create a new band    |
+| PUT    | `/bands/{id}`       | Edit the name of a band    |
+| DELETE    | `/bands/{id}`       | Sof delete a band    |
 
 
 ---
