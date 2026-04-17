@@ -1,5 +1,6 @@
 ﻿using Band.Data;
 using Band.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Band.Routes
 {
@@ -18,9 +19,30 @@ namespace Band.Routes
                     await context.SaveChangesAsync(); // It commits the changes.
                     return Results.Created($"/band/{band.Id}", band);
                 });
-            //route.MapGet("", () =>);
-            //route.MapDelete("", () =>);
+            
+            route.MapGet("", async (BandContext context) =>
+                {
+                    var bands = await context.Bands.ToListAsync();
+                    return Results.Ok(bands);
+                });
+
+            route.MapPut("{id:guid}", 
+                async (Guid id, BandRequest req, BandContext context) =>
+                {
+                    // FirstOrDefault returns the first element of a sequence,
+                    // or a default value if no element is found without throwing an Exception.
+                    var band = await context.Bands.FirstOrDefaultAsync(x => x.Id == id);
+
+                    if (band == null)
+                    {
+                        return Results.NotFound();
+                    }
+
+                    band.UpdateName(req.name);
+                    await context.SaveChangesAsync();
+
+                    return Results.Ok(band);
+                });
         }
     }
-
 }

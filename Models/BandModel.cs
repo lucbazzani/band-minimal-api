@@ -9,6 +9,10 @@
         }
         public Guid Id { get; init; }
         public string Name { get; private set; }
-        
+
+        public void UpdateName(string name)
+        {
+            Name = name;
+        }
     }
 }
