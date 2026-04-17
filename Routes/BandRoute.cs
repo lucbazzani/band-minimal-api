@@ -33,7 +33,7 @@ namespace Band.Routes
                     // or a default value if no element is found without throwing an Exception.
                     var band = await context.Bands.FirstOrDefaultAsync(x => x.Id == id);
 
-                    if (band == null)
+                    if (band == null || !band.IsActive)
                     {
                         return Results.NotFound();
                     }
@@ -42,6 +42,23 @@ namespace Band.Routes
                     await context.SaveChangesAsync();
 
                     return Results.Ok(band);
+                });
+
+            route.MapDelete("{id:guid}",
+                async (Guid id, BandContext context) =>
+                {
+                    var band = await context.Bands.FirstOrDefaultAsync(x => x.Id == id);
+
+                    if (band == null || !band.IsActive)
+                    {
+                        return Results.NotFound();
+                    }
+                    
+                    band.SetInactive();
+                    await context.SaveChangesAsync();
+
+                    return Results.Ok(band);
+                                        
                 });
         }
     }
